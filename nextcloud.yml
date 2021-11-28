@@ -1,15 +1,16 @@
 ---
 - name: Nextcloud Guide iet-182
-  hosts: nextcloud
+  hosts: all
+  become: true
   roles:
   - prep_os
-  - prep_storage
-  - prep_mariadb
-  - prep_php_fpm
-  - prep_nginx
-  - prep_ssl
-  - prep_redis
-  - prep_ssmtp
-  - prep_nextcloud
+  # - prep_storage
+  # - prep_mariadb
+  # - prep_php_fpm
+  # - prep_nginx
+  # - prep_ssl
+  # - prep_redis
+  # - prep_ssmtp
+  # - prep_nextcloud
  
   
