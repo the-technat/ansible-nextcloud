@@ -1,0 +1,10 @@
+---
+collections:
+- community.general 
+- hetzner.hcloud
+
+roles:
+- name: prep_os
+  src: https://gitlab.com/ansible_technat/ansible-hetzner-nextcloud.git
+  scm: git
+  version: develop
