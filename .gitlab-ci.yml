@@ -1,0 +1,16 @@
+image: alpine
+
+stages:
+  - lint
+
+# Install ansible and dependencies
+before_script:
+- apk update
+- apk add --no-cache ansible py3-pip 
+- pip install ansible-lint
+
+lint:
+  stage: lint
+  script:
+  - ansible-playbook --syntax-check --list-tasks nextcloud.yml
+  - ansible-lint nextcloud.yml

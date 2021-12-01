@@ -1,2 +1,0 @@
-[nextcloud]
-65.21.251.19  ansible_port=58222 ansible_user=nc ansible_ssh_private_key_file=/home/technat/.ssh/default/id_rsa
