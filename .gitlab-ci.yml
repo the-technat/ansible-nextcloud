@@ -8,6 +8,7 @@ before_script:
 - apk update
 - apk add --no-cache ansible py3-pip 
 - pip install ansible-lint
+- ansible-galaxy collection install community.general
 
 lint:
   stage: lint

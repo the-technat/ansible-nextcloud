@@ -1,9 +1,9 @@
 ---
-- name: apt dist-upgrade
+- name: System Upgrade
   apt:
     upgrade: dist
     autoremove: true
-- name: install system packages
+- name: Install base packages
   apt:
     name:
     - zip
@@ -11,4 +11,64 @@
     - curl
     - software-properties-common
     - apt-transport-https
+    - ufw
+    - bash-completion
+    - vim
+    - git
+    - lvm2
     state: latest
+- name: Default deny incoming
+  ufw:
+    direction: incoming
+    default: deny
+- name: Default allow outgoing
+  ufw:
+    direction: outgoing
+    default: allow
+- name: Allow incoming HTTP traffic
+  ufw:
+    rule: allow
+    port: 80
+- name: Allow incoming HTTPS traffic
+  ufw:
+    rule: allow
+    port: 443
+- name: Allow incoming SSH traffic
+  ufw:
+    rule: allow
+    port: 58222
+- name: Enable UFW firewall
+  community.general.ufw:
+    state: enabled
+- name: Partition data disk
+  parted:
+    device: /dev/sdb
+    number: 1
+    flags: [ lvm ]
+    state: present
+- name: Create VG
+  lvg:
+    vg: nc
+    pvs: /dev/sdb1
+    pesize: 16
+- name: Create LV
+  lvol:
+    vg: nc
+    lv:  data
+    size: 1g
+    force: yes
+- name: Create mount directory
+  file:
+    path: /data
+    state: directory
+    mode: '0770'
+- name: Format LV with ext4
+  filesystem:
+    fstype: ext4
+    dev: /dev/nc/data
+- name: Mount LV in data dir
+  mount:
+    path: /data
+    src: /dev/nc/data
+    fstype: ext4
+    state: mounted

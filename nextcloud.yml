@@ -2,22 +2,8 @@
 - name: Nextcloud Guide iet-182
   hosts: all
   become: true
-  tasks:
-  - name: apt dist-upgrade
-    apt:
-      upgrade: dist
-      autoremove: true
-  - name: install system packages
-    apt:
-      name:
-      - zip
-      - unzip
-      - curl
-      - software-properties-common
-      - apt-transport-https
-      state: latest
-  # roles:
-  # - prep_os
+  roles:
+  - prep_os
   # - prep_storage
   # - prep_mariadb
   # - prep_php_fpm
@@ -26,12 +12,4 @@
   # - prep_redis
   # - prep_ssmtp
   # - prep_nextcloud
- 
   
-          # # Configure Firewall
-          #   # - ufw default deny incoming
-          #     # - ufw default allow outgoing
-          #       # - ufw allow 80/tcp
-          #         # - ufw allow 443/tcp
-          #           # - ufw allow 58222/tcp
-          #            
