@@ -9,6 +9,7 @@ before_script:
 - apk add --no-cache ansible py3-pip 
 - pip install ansible-lint
 - ansible-galaxy install -r requirements.yml 
+- chmod 770 .
 
 lint:
   stage: lint
