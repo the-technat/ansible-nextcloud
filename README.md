@@ -1,14 +1,19 @@
 # ansible-hetzner-nextcloud
 
-Ansible Playbook to setup nextcloud on Hetzner Cloud
+Ansible Playbook to setup nextcloud on Debian Server
 
-## Getting started
+## Credits
+
+This is my very first ansible playbook and it highly copied from https://github.com/ReinerNippes/nextcloud. 
+
 
 ## Development
 
-### Write an inventory
+### Create inventory
 
-### Run
+Make sure the information to access the server is correct.
+
+### Run locally
 
 ```console
 ansible-galaxy install -r requirements.yml
