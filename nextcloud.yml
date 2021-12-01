@@ -4,7 +4,7 @@
   become: true
   roles:
   - prep_os
-  # - prep_storage
+  - mariadb
   # - prep_mariadb
   # - prep_php_fpm
   # - prep_nginx

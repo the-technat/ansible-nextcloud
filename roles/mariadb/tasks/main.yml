@@ -1,0 +1,52 @@
+---
+# Taken from https://github.com/ReinerNippes/nextcloud/blob/master/roles/prep_mariadb/tasks/main.yml
+- name: Install MariaDB
+  apt:
+    name:
+    - mariadb-server
+    update_cache: yes
+    state: latest
+- name: Enabled and start MariaDB server
+  systemd:
+    name: mariadb
+    enabled: yes
+    state: restarted
+- name: create conf dir
+  file:
+    name: "{{ mariadb_conf_dir | dirname }}"
+    owner: root
+    group: root
+    mode: 0755
+    state: directory
+- name: configure mariadb
+  template:
+    src: my.cnf.j2
+    dest: "{{ mariadb_conf_dir }}"
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mariadb
+- name: remove anonymous user
+  mysql_user:
+    name: ''
+    host_all: yes
+    state: absent
+    login_unix_socket: "{{ mariadb_sock_dir }}/mysqld.sock"
+- name: remove test db
+  mysql_db:
+    name: test
+    state: absent
+    login_unix_socket: "{{ mariadb_sock_dir }}/mysqld.sock"
+- name: create nextcloud db
+  mysql_db:
+    name: "{{ nc_db }}"
+    collation: utf8mb4_general_ci
+    encoding: utf8mb4
+    login_unix_socket: "{{ mariadb_sock_dir }}/mysqld.sock"
+- name: create nextcloud user
+  mysql_user:
+    name:     "{{ nc_db_user }}"
+    password: "{{ nc_db_passwd }}"
+    priv:     "{{ nc_db }}.*:ALL"
+    state: present
+    login_unix_socket: "{{ mariadb_sock_dir }}/mysqld.sock"
