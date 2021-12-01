@@ -1,8 +1,9 @@
 ---
-- name: System Upgrade
+- name: System upgrade
   apt:
     upgrade: dist
     autoremove: true
+    update_cache: yes
 - name: Install base packages
   apt:
     name:
@@ -16,6 +17,7 @@
     - vim
     - git
     - lvm2
+    - parted
     state: latest
 - name: Default deny incoming
   ufw:
