@@ -1,6 +1,7 @@
 # ansible-hetzner-nextcloud
+![build](https://img.shields.io/gitlab/pipeline-status/ansible_technat/ansible-hetzner-nextcloud?branch=develop)
 
-Ansible Playbook to setup nextcloud on Debian Server
+Ansible Playbook to setup nextcloud on Debian Bullseye.
 
 ## Credits
 
