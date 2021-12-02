@@ -1,18 +1,15 @@
-image: alpine
+# Ref: https://hub.docker.com/r/cytopia/ansible-lint
+image: registry.gitlab.com/pipeline-components/ansible-lint:latest
 
 stages:
-  - lint
+  - linting
 
-# Install ansible and dependencies
-before_script:
-- apk update
-- apk add --no-cache ansible py3-pip 
-- pip install ansible-lint
-- ansible-galaxy install -r requirements.yml 
-- chmod 770 .
-
-lint:
-  stage: lint
+ansible-lint:
+  stage: linting
+  artifacts:
+    when: always
+    reports:
+      junit: ansible-lint.xml
   script:
-  - ansible-playbook --syntax-check --list-tasks nextcloud.yml
-  - ansible-lint nextcloud.yml
+    - ansible-lint -v --show-relpath --parseable-severity --nocolor .
+      | ansible-lint-junit -o ansible-lint.xml
