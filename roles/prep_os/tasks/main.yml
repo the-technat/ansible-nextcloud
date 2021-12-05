@@ -18,7 +18,7 @@
     - parted
     - python3-pip
     state: latest
-- name: Default deny incoming
+- name: Default deny incoming traffic
   ufw:
     direction: incoming
     default: deny
@@ -52,7 +52,7 @@
     vg: nc
     pvs: ["{{ data_disk }}1"]
     pesize: "{{ pesize }}" 
-- name: LV dev/nc/data created
+- name: LV /dev/nc/data created
   lvol:
     vg: nc
     lv:  data

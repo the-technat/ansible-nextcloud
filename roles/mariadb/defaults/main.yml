@@ -2,4 +2,4 @@
 nc_db: 'nextcloud'
 nc_db_user: 'nextcloud'
 nc_db_passwd: '' # leave empty to generate random password
-
+credential_store: '' # Path where to save generated passwords, defaults to the playbook directory
