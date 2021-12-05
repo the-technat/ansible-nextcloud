@@ -1,10 +1,8 @@
 ---
-- name: System upgrade
+- name: Update package index
   apt:
-    upgrade: dist
-    autoremove: true
     update_cache: yes
-- name: Install base packages
+- name: Ensure base packages are installed
   apt:
     name:
     - zip
@@ -18,57 +16,58 @@
     - git
     - lvm2
     - parted
+    - python3-pip
     state: latest
 - name: Default deny incoming
   ufw:
     direction: incoming
     default: deny
-- name: Default allow outgoing
+- name: Default allow outgoing traffic
   ufw:
     direction: outgoing
     default: allow
 - name: Allow incoming HTTP traffic
   ufw:
     rule: allow
-    port: 80
+    port: "{{ http_port }}"
 - name: Allow incoming HTTPS traffic
   ufw:
     rule: allow
-    port: 443
+    port: "{{ https_port }}"
 - name: Allow incoming SSH traffic
   ufw:
     rule: allow
-    port: 58222
-- name: Enable UFW firewall
+    port: "{{ ssh_port }}"
+- name: UFW firewall enabled
   community.general.ufw:
     state: enabled
-- name: Partition data disk
+- name: Data disk partitioned
   parted:
-    device: /dev/sdb
+    device: "{{ data_disk }}"
     number: 1
     flags: [ lvm ]
     state: present
-- name: Create VG
+- name: VG nc created
   lvg:
     vg: nc
-    pvs: /dev/sdb1
-    pesize: 16
-- name: Create LV
+    pvs: ["{{ data_disk }}1"]
+    pesize: "{{ pesize }}" 
+- name: LV dev/nc/data created
   lvol:
     vg: nc
     lv:  data
     size: 1g
     force: yes
-- name: Create mount directory
+- name: Mount directory exists
   file:
     path: /data
     state: directory
     mode: '0770'
-- name: Format LV with ext4
+- name: LV formated with ext4
   filesystem:
     fstype: ext4
     dev: /dev/nc/data
-- name: Mount LV in data dir
+- name: LV mounted at /data
   mount:
     path: /data
     src: /dev/nc/data

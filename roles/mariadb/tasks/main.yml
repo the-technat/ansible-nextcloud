@@ -1,12 +1,16 @@
 ---
 # Taken from https://github.com/ReinerNippes/nextcloud/blob/master/roles/prep_mariadb/tasks/main.yml
+- name: install PyMySQL
+  pip: 
+    name: PyMySQL
+    state: latest
 - name: Install MariaDB
   apt:
     name:
     - mariadb-server
     update_cache: yes
     state: latest
-- name: Enabled and start MariaDB server
+- name: Enable and start MariaDB server
   systemd:
     name: mariadb
     enabled: yes

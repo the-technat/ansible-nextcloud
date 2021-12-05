@@ -1,8 +1,1 @@
-[nextcloud]
 135.181.194.21 ansible_ssh_port=58222 ansible_user=ci ansible_ssh_private_key_file=/home/technat/.ssh/ansible/ansible_id_rsa
-
-[nextcloud:vars]
-# database settings
-nc_db                = 'nextcloud'
-nc_db_user           = 'nextcloud'
-nc_db_passwd         = '' # leave empty to generate random password

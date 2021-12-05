@@ -5,18 +5,19 @@ Ansible Playbook to setup nextcloud on Debian Bullseye.
 
 ## Credits
 
-This is my very first ansible playbook and it highly copied from https://github.com/ReinerNippes/nextcloud. 
+This is my very first ansible playbook and its mostly copied from https://github.com/ReinerNippes/nextcloud. 
 
 
-## Development
+## Usage
 
 ### Create inventory
 
-Make sure the information to access the server is correct.
+Edit the inventory and adjust the Username, SSH Port and Public Key accordingly.
 
-### Run locally
+Then run it like so:
 
 ```console
+pip install -r requirements.txt
 ansible-galaxy install -r requirements.yml
 ansible-playbook nextcloud.yml -v 
 ```
