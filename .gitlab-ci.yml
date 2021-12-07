@@ -1,5 +1,5 @@
 # Ref: https://hub.docker.com/r/cytopia/ansible-lint
-image: registry.gitlab.com/pipeline-components/ansible-lint:latest
+image: docker.io/cytopia/ansible-lint
 
 stages:
   - linting
