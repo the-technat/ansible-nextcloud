@@ -1,22 +1,5 @@
 ---
 # Taken from https://github.com/ReinerNippes/nextcloud/blob/master/roles/prep_mariadb/tasks/main.yml
-- name: Figure out where to save credentials locally 
-  set_fact:
-    credential_store: "{{ playbook_dir }}/secrets"
-    credential_store_owner: "{{ lookup('env', 'USER') }}"
-  when: credential_store == ''
-  delegate_to: localhost
-- name: Ensure {{ credential_store }} is available
-  file: 
-    owner: "{{ credential_store_owner }}"
-    name: '{{ credential_store }}'
-    mode:  0700
-    state: directory
-  delegate_to: localhost
-- name: Generate DB password if nc_db_passwd is empty
-  set_fact: 
-    nc_db_passwd: "{{ lookup('password', '{{ credential_store }}/database_secret chars=ascii_letters,digits length=32') }}"
-  when: nc_db_passwd == ''
 - name: Ensure PyMySQL is installed
   pip: 
     name: PyMySQL
@@ -67,7 +50,7 @@
 - name: Nextcloud DB user exists
   mysql_user:
     name:     "{{ nc_db_user }}"
-    password: "{{ nc_db_passwd }}"
+    password: "{{ lookup('password', '/tmp/passwordfile chars=ascii_letters,digits,punctuation length=20') }}"
     priv:     "{{ nc_db }}.*:ALL"
     state: present
     login_unix_socket: "{{ mariadb_sock_dir }}/mysqld.sock"
