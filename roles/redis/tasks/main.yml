@@ -10,7 +10,7 @@
     name: redis
     enabled: true
     state: started
-- name: MariaDB config is present
+- name: Redis config is present
   copy:
     src: redis.conf
     dest: "{{ redis_conf_path }}/redis.conf"
