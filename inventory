@@ -1,0 +1,1 @@
+65.21.178.121 ansible_ssh_port=58222 ansible_user=ci ansible_ssh_private_key_file=/home/technat/.ssh/ansible/ansible_id_rsa

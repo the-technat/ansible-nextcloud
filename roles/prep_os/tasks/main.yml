@@ -17,6 +17,7 @@
     - lvm2
     - parted
     - python3-pip
+    - gpg
     state: latest
 - name: Default deny incoming traffic
   ufw:
@@ -73,3 +74,7 @@
     src: /dev/nc/data
     fstype: ext4
     state: mounted
+- name: Ensure Timezone is UTC+00:00
+  timezone:
+    name: 'Australia/Currie' # UTC+00:00 
+    hwclock: 'UTC'
