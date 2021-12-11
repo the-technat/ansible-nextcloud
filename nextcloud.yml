@@ -6,7 +6,7 @@
   - prep_os
   - mariadb
   - redis
-  - php-fpm
+  # - php-fpm
   # - prep_php_fpm
   # - prep_nginx
   # - prep_ssl
