@@ -2,12 +2,12 @@
 - name: Nextcloud Guide iet-182
   hosts: all
   become: true
+  become_user: root
   roles:
   - prep_os
   - mariadb
   - redis
-  # - php-fpm
-  # - prep_php_fpm
+  - php-fpm
   # - prep_nginx
   # - prep_ssl
   # - prep_redis

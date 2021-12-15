@@ -10,5 +10,6 @@ ansible-lint:
     reports:
       junit: ansible-lint.xml
   script:
+    - ansible-playbook nextcloud.yml --syntax-check
     - ansible-lint -v --show-relpath --parseable-severity --nocolor .
       | ansible-lint-junit -o ansible-lint.xml
