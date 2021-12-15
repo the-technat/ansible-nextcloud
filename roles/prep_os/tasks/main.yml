@@ -18,6 +18,7 @@
     - parted
     - python3-pip
     - gpg
+    - gpg-agent
     state: latest
 - name: Default deny incoming traffic
   ufw:
