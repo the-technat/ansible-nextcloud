@@ -8,9 +8,8 @@
   - mariadb
   - redis
   - php-fpm
+  - certbot
   # - prep_nginx
-  # - prep_ssl
-  # - prep_redis
   # - prep_ssmtp
   # - prep_nextcloud
   
