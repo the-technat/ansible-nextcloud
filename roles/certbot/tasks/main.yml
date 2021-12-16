@@ -7,7 +7,7 @@
     autoremove: true
     state: latest
 - name: let's encrypt certificates present
-  shell: "certbot certonly --nginx -m {{ cert_email }} -d {{ fqdn }} --agree-tos"
+  shell: "certbot certonly --nginx -m {{ cert_mail }} -d {{ fqdn }} --agree-tos"
   args:
     creates: /etc/letsencrypt/live/{{ fqdn }}/cert.pem
 - name: Cert renewal job is present

@@ -20,7 +20,7 @@
 - name: Nextcloud virtualhost is present
   template:
     src: nextcloud.j2
-    dest: "/etc/nginx/sites-available/{{ fqdn }}"
+    dest: "/etc/nginx/sites-enabled/{{ fqdn }}"
     owner: root
     group: root
     mode: 0644

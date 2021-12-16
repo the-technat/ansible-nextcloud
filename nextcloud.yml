@@ -4,12 +4,12 @@
   become: true
   become_user: root
   roles:
-  - prep_os
-  - mariadb
-  - redis
-  - php-fpm
-  - certbot
-  # - prep_nginx
+  # - prep_os
+  # - mariadb
+  # - redis
+  # - php-fpm
+  # - certbot
+  - nginx
   # - prep_ssmtp
   # - prep_nextcloud
   
