@@ -43,6 +43,12 @@
 - name: UFW firewall enabled
   community.general.ufw:
     state: enabled
+- name: Get data disk by size
+  set_fact: 
+    data_disk: "/dev/{{ item.key }}" 
+  when:
+    - item.value.vendor == "HC"
+  with_dict: "{{ ansible_devices }}"
 - name: Data disk partitioned
   parted:
     device: "{{ data_disk }}"
@@ -71,7 +77,7 @@
     dev: /dev/nc/data
 - name: LV mounted at /data
   mount:
-    path: /data
+    path: "{{ data_dir }}"
     src: /dev/nc/data
     fstype: ext4
     state: mounted
