@@ -1,6 +1,6 @@
 # ansible-hetzner-nextcloud
 
-![build](https://img.shields.io/gitlab/pipeline-status/ansible_technat/ansible-hetzner-nextcloud?branch=develop)
+![build](https://img.shields.io/gitlab/pipeline-status/technat/ansible-nextcloud?branch=develop&gitlab_url=https%3A%2F%2Fcode.immerda.ch)
 
 Ansible Playbook to setup nextcloud on Debian Bullseye.
 
