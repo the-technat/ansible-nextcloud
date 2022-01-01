@@ -1,11 +1,11 @@
 # source: https://docs.nextcloud.com/server/latest/admin_manual/installation/nginx.html
 upstream php-handler {
-    server unix:/var/run/php8.0-fpm-nextcloud.sock;
+    server unix:{{ php_fpm_sock }};
 }
 
 server {
-    listen 80;
-    listen [::]:80;
+    listen {{ http_port }};
+    listen [::]:{{ http_port }};
     server_name {{ fqdn }};
 
     # Enforce HTTPS
@@ -13,8 +13,8 @@ server {
 }
 
 server {
-    listen 443      ssl http2;
-    listen [::]:443 ssl http2;
+    listen {{ https_port }}      ssl http2;
+    listen [::]:{{ https_port }} ssl http2;
     server_name {{ fqdn }};
 
     # Use Mozilla's guidelines for SSL/TLS settings
@@ -60,7 +60,7 @@ server {
     fastcgi_hide_header X-Powered-By;
 
     # Path to the root of your installation
-    root /var/www/{{ fqdn }};
+    root /var/www/nextcloud;
 
     # Specify how to handle directories -- specifying `/index.php$request_uri`
     # here as the fallback means that Nginx always exhibits the desired behaviour

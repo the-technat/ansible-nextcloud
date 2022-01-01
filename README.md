@@ -22,10 +22,20 @@ Ansible has [a lot of places](https://docs.ansible.com/ansible/latest/user_guide
 
 Edit the inventory and adjust the Username, SSH Port and Public Key accordingly.
 
+You can define some settings for your nextcloud in `settings.yml`.
+
+Note: For the `nc_passwd` and `nc_db_password` variable it's highly recommended to store them in an ansible-vault file instead of the settings.yml. Here's how you do that:
+
+```bash
+ansible-vault create secrets.yml
+```
+
+The command will prompt you for a Vault password and then open an editor where you can enter the secure variables. Once you save, the command will save that file in your directory but in an encrypted way.
+
 Then run it like so:
 
 ```console
 pip install -r requirements.txt
 ansible-galaxy install -r requirements.yml
-ansible-playbook nextcloud.yml -v 
+ansible-playbook nextcloud.yml -v  --ask-vault-pass -e "@secrets.yml“
 ```
